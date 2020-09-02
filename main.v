@@ -2,7 +2,7 @@ module main(rst_n,clk,keys,leds,seg_nCS,seg_leds);
 	input rst_n;	//复位
 	input clk;	//50MHZ的时钟
 	input [7:0]keys;//未经消抖按键
-	output reg  [7:0]leds;//一排led	
+	output wire  [7:0]leds;//一排led	
 	output wire [5:0]seg_nCS;//位选
 	output wire [7:0]seg_leds;//段选
 	wire krst,key1, key2, key3, key4, key5, key6, key7;//消抖后按键们
@@ -16,7 +16,7 @@ module main(rst_n,clk,keys,leds,seg_nCS,seg_leds);
 	//复位状态，学号流水灯状态，乘法输入状态，乘法结果显示状态，自动乘法器状态，自动乘法器显示状态
 	reg [7:0]in1,in2,atoin1,atoin2,atoin3,atoin4;
 	//乘法器输入1&2，自动乘法器乘数显示1&2，自动乘法器乘数显示3&4
-	reg [15:0]out,atoout;//乘法结果和自动乘法结果
+	wire [15:0]out,atoout;//乘法结果和自动乘法结果
 	reg en;//流水灯使能位
 	reg flag1=0,flag2=0,flag3=0,flag4=0,flag5=0;//按键标志位
 	reg [7:0]hung,melantha;//占位符00
@@ -34,10 +34,6 @@ module main(rst_n,clk,keys,leds,seg_nCS,seg_leds);
 	defparam texas.CLK_Freq=50000000;
 	defparam texas.OUT_Freq=10;
 	frediv texas(.CLK_50M(clk),.nCR(rst_n),.CLK_Out(fre10));
-	// defparam amiya.N=18;
-	// defparam amiya.CLK_Freq=50000000;
-	// defparam amiya.OUT_Freq=500;
-	// frediv amiya(.CLK_50M(clk),.nCR(rst_n),.CLK_Out(fre500));
 	defparam cuora.N=26;
 	defparam cuora.CLK_Freq=50000000;
 	defparam cuora.OUT_Freq=2;
